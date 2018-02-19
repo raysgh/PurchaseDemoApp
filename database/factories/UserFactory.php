@@ -21,3 +21,37 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Order::class, function (Faker $faker) {
+    return [
+        'user_id' => function() {
+            return factory('App\User')->create()->id;
+        },
+        'supplier_id' => function() {
+            return factory('App\Supplier')->create()->id;
+        },
+        'description' => $faker->sentence,
+        'is_ordered' => $faker->boolean($chanceOfGettingTrue = 20),
+    ];
+});
+
+$factory->define(App\OrderLine::class, function (Faker $faker) {
+    return [
+        'order_id' => function() {
+            return factory('App\Order')->create()->id;
+        },
+        'description' => $faker->sentence,
+        'quantity' => $faker->randomDigitNotNull,
+        'price' => $faker->randomNumber($nbDigits = 6, $strict = false),
+    ];
+});
+
+$factory->define(App\Supplier::class, function (Faker $faker) {
+    return [
+        'name' => $faker->company,
+        'address' => $faker->streetAddress,
+        'postcode' => $faker->postcode,
+        'city' => $faker->city,
+        'country' => $faker->country,
+    ];
+});
