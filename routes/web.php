@@ -12,16 +12,8 @@ use App\Order;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-
-    $orders = Order::with('orderlines')
-        ->get()
-        ->map(function ($order) {
-            $order['totalPrice'] = $order['orderLines']->sum('price');
-            return $order;
-        });
-
-    return view('orders.index', compact('orders'));
-
+Route::get('/', function() {
+    return redirect('/orders');
 });
+
+Route::get('/orders', 'OrdersController@index');
