@@ -1,5 +1,7 @@
 <?php
 
+use App\Order;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $orders = Order::with('orderlines')
+        ->get()
+        ->map(function ($order) {
+            $order['totalPrice'] = $order['orderLines']->sum('price');
+            return $order;
+        });
+
+    return view('orders.index', compact('orders'));
+
 });
