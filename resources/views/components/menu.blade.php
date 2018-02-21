@@ -4,7 +4,7 @@
   </p>
   <ul class="menu-list">
     <li>
-      <a>
+      <a href="/dashboard">
         <span class="icon has-text-info">
           <i class="fas fa-info-circle"></i>
         </span>
