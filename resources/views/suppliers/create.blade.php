@@ -1,4 +1,5 @@
 @extends('layouts.purchaseApp')
+@section('title', 'New Supplier')
 @section('content')
 
 

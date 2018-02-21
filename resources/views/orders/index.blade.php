@@ -1,4 +1,5 @@
 @extends('layouts.purchaseApp')
+@section('title', 'Orders')
 @section('content')
 
   <table class="table">

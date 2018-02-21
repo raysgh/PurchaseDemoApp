@@ -22,7 +22,7 @@
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            All Orders
+            @yield('title')
           </h1>
           <h2 class="subtitle">
             Purchase Demo App
