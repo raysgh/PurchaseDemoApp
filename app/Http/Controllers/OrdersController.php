@@ -102,6 +102,10 @@ class OrdersController extends Controller
      */
     public function show(Order $order)
     {
+        $order['totalPrice'] = $order['orderLines']->sum(function ($product) {
+            return $product['quantity'] * $product['price'];
+        });
+
         return view('orders.show', compact('order'));
     }
 
@@ -151,7 +155,9 @@ class OrdersController extends Controller
 
         return $order->get()
             ->map(function ($order) {
-                $order['totalPrice'] = $order['orderLines']->sum('price');
+                $order['totalPrice'] = $order['orderLines']->sum(function ($product) {
+                    return $product['quantity'] * $product['price'];
+                });
                 return $order;
             });
     }

@@ -61,13 +61,13 @@
         <tr>
           <td>{{ $orderLine->quantity }}</td>
           <td>{{ str_limit($orderLine->description, 50) }}</td>
-          <td>{{ $orderLine->price }}</td>
+          <td>&euro; {{ number_format($orderLine->price / 100, 2, ',', '.') }}</td>
         </tr>
       @endforeach
       <tr>
         <td></td>
         <td><strong>Total:</strong></td>
-        <td><strong>show total price</strong></td>
+        <td><strong>&euro; {{ number_format($order->totalPrice / 100, 2, ',', '.') }}</strong></td>
       </tr>
     </tbody>
   </table>
