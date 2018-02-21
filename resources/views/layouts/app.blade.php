@@ -22,12 +22,12 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="container">
       <div class="columns">
-        <div class="column is-one-quarter">
+        <div class="column is-3">
           @include('components.menu')
         </div>
-        <div class="column">
+        <div class="column is-9">
           @yield('content')
         </div>
       </div>

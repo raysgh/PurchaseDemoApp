@@ -70,7 +70,7 @@
   </p>
   <ul class="menu-list">
     <li>
-      <a>
+      <a href="/suppliers/create">
         <span class="icon has-text-info">
           <i class="fas fa-plus-circle"></i>
         </span>
@@ -78,7 +78,7 @@
       </a>
     </li>
     <li>
-      <a>
+      <a href="/suppliers">
         <span class="icon has-text-info">
           <i class="fas fa-play-circle"></i>
         </span>

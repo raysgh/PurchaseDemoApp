@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">
-
   <table class="table">
     <thead>
       <tr>
@@ -17,8 +15,8 @@
       @foreach($orders as $order)
         <tr>
           <td>{{ $order->id }}</td>
-          <td>{{ $order->description}}</td>
-          <td>{{ $order->supplier->name }}</td>
+          <td>{{ str_limit($order->description, 50) }}</td>
+          <td>{{ str_limit($order->supplier->name, 30) }}</td>
           <td>&euro; {{ number_format($order->totalPrice / 100, 2, ',', '.') }}</td>
           <td>
 
@@ -32,8 +30,5 @@
     </tbody>
   </table>
 
-
-
-</div>
 
 @endsection

@@ -17,3 +17,5 @@ Route::get('/', function() {
 });
 
 Route::get('/orders', 'OrdersController@index');
+
+Route::resource('suppliers', 'SuppliersController');
