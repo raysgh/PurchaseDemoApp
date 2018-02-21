@@ -16,7 +16,7 @@ Route::get('/', function() {
     return redirect('/home');
 });
 
-Route::get('/orders', 'OrdersController@index');
+Route::resource('orders', 'OrdersController');
 
 Route::resource('suppliers', 'SuppliersController');
 

@@ -33,7 +33,7 @@
   </p>
   <ul class="menu-list">
     <li>
-      <a>
+      <a href="/orders/create">
         <span class="icon has-text-info">
           <i class="fas fa-plus-circle"></i>
         </span>

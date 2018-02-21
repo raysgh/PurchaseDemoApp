@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Supplier;
 
 class OrdersController extends Controller
 {
@@ -25,7 +26,11 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+        $suppliers = Supplier::get();
+
+        return view('orders.create', [
+          'suppliers' => $suppliers
+        ]);
     }
 
     /**
@@ -36,7 +41,21 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'supplier' => 'required',
+            'description' => 'required',
+            'quantity0' => 'required',
+            'description0' => 'required',
+            'price0' => 'required',
+            'quantity1' => 'required',
+            'description1' => 'required',
+            'price1' => 'required',
+            'quantity2' => 'required',
+            'description2' => 'required',
+            'price2' => 'required'
+        ]);
+        
+        return $request;
     }
 
     /**
