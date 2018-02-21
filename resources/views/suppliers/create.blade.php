@@ -53,7 +53,12 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link" type="submit">Submit</button>
+        <button class="button is-link" type="submit">
+          <span class="icon">
+            <i class="fas fa-save"></i>
+          </span>
+          <span>Save</span>
+        </button>
       </div>
       <div class="control">
         <button class="button is-text">Cancel</button>
