@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderLine;
 use App\Supplier;
 
 class OrdersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,8 +60,38 @@ class OrdersController extends Controller
             'description2' => 'required',
             'price2' => 'required'
         ]);
-        
-        return $request;
+
+        $order = Order::create([
+            'user_id' => auth()->id(),
+            'supplier_id' => request('supplier'),
+            'description' => request('description'),
+            'is_ordered' => false
+        ]);
+
+        $pos0 = [
+          'order_id' => $order->id,
+          'description' => request('description0'),
+          'quantity' => request('quantity0'),
+          'price' => request('price0'),
+        ];
+        $pos1 = [
+          'order_id' => $order->id,
+          'description' => request('description1'),
+          'quantity' => request('quantity1'),
+          'price' => request('price1'),
+        ];
+        $pos2 = [
+          'order_id' => $order->id,
+          'description' => request('description2'),
+          'quantity' => request('quantity2'),
+          'price' => request('price2'),
+        ];
+
+        $this->createLine($pos0);
+        $this->createLine($pos1);
+        $this->createLine($pos2);
+
+        return redirect('orders/' . $order->id);
     }
 
     /**
@@ -64,9 +100,9 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -118,5 +154,15 @@ class OrdersController extends Controller
                 $order['totalPrice'] = $order['orderLines']->sum('price');
                 return $order;
             });
+    }
+
+    public function createLine($line)
+    {
+        OrderLine::create([
+            'order_id' => $line['order_id'],
+            'description' => $line['description'],
+            'quantity' => $line['quantity'],
+            'price' => $line['price'],
+        ]);
     }
 }
