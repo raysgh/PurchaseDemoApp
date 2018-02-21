@@ -2,7 +2,7 @@
 @section('title', 'Order #' . $order->id)
 @section('content')
 
-  <table class="table">
+  <table class="table is-hoverable is-fullwidth">
     <thead>
       <tr>
         <th>Order</th>
@@ -27,7 +27,7 @@
     </tbody>
   </table>
 
-  <table class="table">
+  <table class="table is-hoverable is-fullwidth">
     <thead>
       <tr>
         <th>Supplier</th>
@@ -48,7 +48,7 @@
     </tbody>
   </table>
 
-  <table class="table">
+  <table class="table is-hoverable is-fullwidth">
     <thead>
       <tr>
         <th>Quantity</th>

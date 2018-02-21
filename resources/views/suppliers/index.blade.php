@@ -2,7 +2,7 @@
 @section('title', 'Suppliers')
 @section('content')
 
-  <table class="table">
+  <table class="table is-hoverable is-fullwidth">
     <thead>
       <tr>
         <th>Supplier</th>
