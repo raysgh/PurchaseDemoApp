@@ -13,9 +13,13 @@ use App\Order;
 |
 */
 Route::get('/', function() {
-    return redirect('/orders');
+    return redirect('/home');
 });
 
 Route::get('/orders', 'OrdersController@index');
 
 Route::resource('suppliers', 'SuppliersController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
