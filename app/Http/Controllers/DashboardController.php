@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Order;
+use App\OrderLine;
+use App\Supplier;
 
 class DashboardController extends Controller
 {
@@ -13,6 +16,14 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('dashboard.index');
+        $orders = Order::get()->count();
+        $orderLines = OrderLine::get()->count();
+        $suppliers = Supplier::get()->count();
+        $spend = OrderLine::get()
+            ->sum(function($product) {
+                return $product['quantity'] * $product['price'] / 100000;
+        });
+
+        return view('dashboard.index', compact('orders', 'orderLines', 'suppliers', 'spend'));
     }
 }
