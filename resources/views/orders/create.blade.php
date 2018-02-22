@@ -42,37 +42,46 @@
       <label class="label">Order lines</label>
       <div class="field is-grouped">
         <div class="control">
-          <input class="input" type="text" id="quantity0" name="quantity0" placeholder="Quantity" value="{{ old('quantity0') }}">
+          <input class="input" type="text" id="quantity0" name="pos[0][quantity]" placeholder="Quantity" value="{{ old('pos.0.quantity') }}">
         </div>
         <div class="control is-expanded">
-          <input class="input" type="text" id="description0" name="description0" placeholder="Description" value="{{ old('description0') }}">
+          <input class="input" type="text" id="description0" name="pos[0][description]" placeholder="Description" value="{{ old('pos.0.description') }}">
         </div>
-        <div class="control">
-          <input class="input" type="text" id="price0" name="price0" placeholder="Price" value="{{ old('price0') }}">
+        <div class="control has-icons-left">
+          <input class="input" type="text" id="price0" name="pos[0][price]" placeholder="0,00" value="{{ old('pos.0.price') }}">
+          <span class="icon is-small is-left">
+            <i class="fas fa-euro-sign"></i>
+          </span>
         </div>
       </div>
 
       <div class="field is-grouped">
         <div class="control">
-          <input class="input" type="text" id="quantity1" name="quantity1" placeholder="Quantity" value="{{ old('quantity1') }}">
+          <input class="input" type="text" id="quantity1" name="pos[1][quantity]" placeholder="Quantity" value="{{ old('pos.1.quantity') }}">
         </div>
         <div class="control is-expanded">
-          <input class="input" type="text" id="description1" name="description1" placeholder="Description" value="{{ old('description1') }}">
+          <input class="input" type="text" id="description1" name="pos[1][description]" placeholder="Description" value="{{ old('pos.1.description') }}">
         </div>
-        <div class="control">
-          <input class="input" type="text" id="price1" name="price1" placeholder="Price" value="{{ old('price1') }}">
+        <div class="control has-icons-left">
+          <input class="input" type="text" id="price1" name="pos[1][price]" placeholder="0,00" value="{{ old('pos.1.price') }}">
+          <span class="icon is-small is-left">
+            <i class="fas fa-euro-sign"></i>
+          </span>
         </div>
       </div>
 
       <div class="field is-grouped">
         <div class="control">
-          <input class="input" type="text" id="quantity2" name="quantity2" placeholder="Quantity" value="{{ old('quantity2') }}">
+          <input class="input" type="text" id="quantity2" name="pos[2][quantity]" placeholder="Quantity" value="{{ old('pos.2.quantity') }}">
         </div>
         <div class="control is-expanded">
-          <input class="input" type="text" id="description2" name="description2" placeholder="Description" value="{{ old('description2') }}">
+          <input class="input" type="text" id="description2" name="pos[2][description]" placeholder="Description" value="{{ old('pos.2.description') }}">
         </div>
-        <div class="control">
-          <input class="input" type="text" id="price2" name="price2" placeholder="Price" value="{{ old('price2') }}">
+        <div class="control has-icons-left">
+          <input class="input" type="text" id="price2" name="pos[2][price]" placeholder="0,00" value="{{ old('pos.2.price') }}">
+          <span class="icon is-small is-left">
+            <i class="fas fa-euro-sign"></i>
+          </span>
         </div>
       </div>
     </div>

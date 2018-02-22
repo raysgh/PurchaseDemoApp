@@ -50,15 +50,9 @@ class OrdersController extends Controller
         $this->validate($request, [
             'supplier' => 'required',
             'description' => 'required',
-            'quantity0' => 'required',
-            'description0' => 'required',
-            'price0' => 'required',
-            'quantity1' => 'required',
-            'description1' => 'required',
-            'price1' => 'required',
-            'quantity2' => 'required',
-            'description2' => 'required',
-            'price2' => 'required'
+            'pos.*.quantity' => 'required',
+            'pos.*.description' => 'required',
+            'pos.*.price' => 'required',
         ]);
 
         $order = Order::create([
@@ -68,28 +62,14 @@ class OrdersController extends Controller
             'is_ordered' => false
         ]);
 
-        $pos0 = [
-          'order_id' => $order->id,
-          'description' => request('description0'),
-          'quantity' => request('quantity0'),
-          'price' => request('price0'),
-        ];
-        $pos1 = [
-          'order_id' => $order->id,
-          'description' => request('description1'),
-          'quantity' => request('quantity1'),
-          'price' => request('price1'),
-        ];
-        $pos2 = [
-          'order_id' => $order->id,
-          'description' => request('description2'),
-          'quantity' => request('quantity2'),
-          'price' => request('price2'),
-        ];
-
-        $this->createLine($pos0);
-        $this->createLine($pos1);
-        $this->createLine($pos2);
+        foreach ($request['pos'] as $pos) {
+            OrderLine::create([
+                'order_id' => $order->id,
+                'description' => $pos['description'],
+                'quantity' => $pos['quantity'],
+                'price' => $pos['price'],
+            ]);
+        }
 
         return redirect('orders/' . $order->id);
     }
@@ -162,13 +142,4 @@ class OrdersController extends Controller
             });
     }
 
-    public function createLine($line)
-    {
-        OrderLine::create([
-            'order_id' => $line['order_id'],
-            'description' => $line['description'],
-            'quantity' => $line['quantity'],
-            'price' => $line['price'],
-        ]);
-    }
 }
