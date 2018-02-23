@@ -119,12 +119,22 @@
     <span>Edit</span>
   </a>
 
-  <a class="button is-primary">
+@if(!$order->is_ordered)
+  <a class="button is-primary" href="/send-order/{{ $order->id }}">
     <span class="icon">
       <i class="fas fa-envelope"></i>
     </span>
     <span>Send</span>
   </a>
+@endif
 
+@if($order->is_ordered)
+  <a class="button is-warning" href="/cancel-order/{{ $order->id }}">
+    <span class="icon">
+      <i class="fas fa-envelope"></i>
+    </span>
+    <span>Cancel Order</span>
+  </a>
+@endif
 
 @endsection

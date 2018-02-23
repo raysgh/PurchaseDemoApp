@@ -25,3 +25,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'DashboardController@index');
+
+Route::get('send-order/{order}', 'SendOrderController@send');
+Route::get('cancel-order/{order}', 'SendOrderController@cancel');
