@@ -2,8 +2,6 @@
 @section('title', 'New Supplier')
 @section('content')
 
-
-
   @if (count($errors))
     <div class="notification">
       <button class="delete"></button>
@@ -14,7 +12,6 @@
   @endif
 
   <form action="/suppliers" method="post">
-
     {{ csrf_field() }}
 
     <div class="field">
@@ -62,12 +59,9 @@
         </button>
       </div>
       <div class="control">
-        <button class="button is-text">Cancel</button>
+        <a href="{{ url()->previous() }}" class="button is-text">Cancel</a>
       </div>
     </div>
-
   </form>
-
-
 
 @endsection
