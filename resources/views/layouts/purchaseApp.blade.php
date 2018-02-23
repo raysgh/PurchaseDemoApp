@@ -13,6 +13,10 @@
       .footer {
         margin-top: 2em;
       }
+      .card {
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
     </style>
 
   </head>
