@@ -95,9 +95,10 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        //
+        $suppliers = Supplier::get();
+        return view('orders.edit', compact('order', 'suppliers'));
     }
 
     /**
@@ -107,9 +108,30 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
-        //
+        $this->validate($request, [
+          'supplier' => 'required',
+          'description' => 'required',
+          'pos.*.quantity' => 'required',
+          'pos.*.description' => 'required',
+          'pos.*.price' => 'required',
+        ]);
+
+        $order->update([
+            'supplier_id' => request('supplier'),
+            'description' => request('description')
+        ]);
+
+        foreach ($request->pos as $id => $value) {
+            OrderLine::find($id)->update([
+                'quantity' => $value['quantity'],
+                'description' => $value['description'],
+                'price' => $value['price']
+            ]);
+        }
+
+        return redirect('/orders/' . $order->id);
     }
 
     /**

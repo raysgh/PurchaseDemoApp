@@ -112,7 +112,7 @@
     </div>
   </div>
 
-  <a class="button is-link">
+  <a class="button is-link" {{ $order->is_ordered ? 'disabled' : 'href=/orders/' . $order->id . '/edit' }}>
     <span class="icon">
       <i class="fas fa-edit"></i>
     </span>
