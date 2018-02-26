@@ -1,5 +1,5 @@
 @extends('layouts.purchaseApp')
-@section('title', 'Order #' . $order->id)
+@section('title', 'Supplier / ' . $supplier->name)
 @section('content')
 
   <div class="columns">
@@ -8,9 +8,9 @@
         <header class="card-header">
           <p class="card-header-title">
             <span class="icon has-text-primary">
-              <i class="fas fa-clipboard"></i>
+              <i class="fas fa-industry"></i>
             </span>
-            Order #{{ $order->id }}
+            Supplier / {{ $supplier->name }}
           </p>
           <a href="#" class="card-header-icon" aria-label="more options">
             <span class="icon">
@@ -20,18 +20,25 @@
         </header>
         <div class="card-content">
           <div class="content">
-            {{ $order->description }}
+            Name:
+            <br>
+            {{ $supplier->name }}
+            <br><br>
+            Address:
+            <br>
+            {{ $supplier->address }}
+            <br>
+            {{ $supplier->postcode }} {{ $supplier->city }}
+            <br>
+            {{ $supplier->country }}
           </div>
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
-            <span class="icon has-text-info">
-              <i class="{{ $order->is_ordered ? 'fas fa-shopping-cart' : 'fab fa-opencart' }}"></i>
-            </span>
-            &nbsp;{{ $order->is_ordered ? 'Ordered' : 'Not Ordered' }}
+            todo
           </p>
           <p class="card-footer-item">
-            Created by&nbsp;<strong>{{ $order->user->name }}</strong>
+            todo
           </p>
         </footer>
       </div>
@@ -41,9 +48,9 @@
         <header class="card-header">
           <p class="card-header-title">
             <span class="icon has-text-primary">
-              <i class="fas fa-industry"></i>
+              <i class="fas fa-chart-bar"></i>
             </span>
-            {{ $order->supplier->name }}
+            Statistics
           </p>
           <a href="#" class="card-header-icon" aria-label="more options">
             <span class="icon">
@@ -53,13 +60,10 @@
         </header>
         <div class="card-content">
           <div class="content">
-            <a href="/suppliers/{{ $order->supplier->id }}">{{ $order->supplier->name }}</a>
+            Total spend <strong>todo</strong>
             <br>
-            {{ $order->supplier->address }}
+            Total orders: <strong>{{ $supplier->orders->count() }}</strong>
             <br>
-            {{ $order->supplier->postcode . ' ' . $order->supplier->city }}
-            <br>
-            {{ $order->supplier->country }}
           </div>
         </div>
       </div>
@@ -70,9 +74,9 @@
     <header class="card-header">
       <p class="card-header-title">
         <span class="icon has-text-primary">
-          <i class="fas fa-list-alt"></i>
+          <i class="fas fa-clipboard"></i>
         </span>
-        Order Lines
+        Orders by {{ $supplier->name }}
       </p>
       <a href="#" class="card-header-icon" aria-label="more options">
         <span class="icon">
@@ -85,56 +89,31 @@
         <table class="table is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th>Quantity</th>
+              <th>Order</th>
               <th>Description</th>
-              <th>Unit Price</th>
-              <th>Amount</th>
+              <th>Lines</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($order->orderLines as $orderLine)
+            @foreach($supplier->orders as $order)
               <tr>
-                <td>{{ $orderLine->quantity }}</td>
-                <td>{{ str_limit($orderLine->description, 50) }}</td>
-                <td>&euro; {{ number_format($orderLine->price / 100, 2, ',', '.') }}</td>
-                <td>&euro; {{ number_format($orderLine->quantity * $orderLine->price / 100, 2, ',', '.') }}</td>
+                <td>{{ $order->id }}</td>
+                <td><a href="/orders/{{ $order->id }}">{{ str_limit($order->description, 50) }}</a></td>
+                <td>{{ $order->orderLines->count() }}</td>
+                <td>&euro; {{ number_format($order->totalPrice / 100, 2, ',', '.') }}</td>
               </tr>
             @endforeach
-            <tr>
-              <td></td>
-              <td></td>
-              <td><strong>Total:</strong></td>
-              <td><strong>&euro; {{ number_format($order->totalPrice / 100, 2, ',', '.') }}</strong></td>
-            </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <a class="button is-link" {{ $order->is_ordered ? 'disabled' : 'href=/orders/' . $order->id . '/edit' }}>
+  <a class="button is-link">
     <span class="icon">
       <i class="fas fa-edit"></i>
     </span>
     <span>Edit</span>
   </a>
-
-@if(!$order->is_ordered)
-  <a class="button is-primary" href="/send-order/{{ $order->id }}">
-    <span class="icon">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span>Send</span>
-  </a>
-@endif
-
-@if($order->is_ordered)
-  <a class="button is-warning" href="/cancel-order/{{ $order->id }}">
-    <span class="icon">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span>Cancel Order</span>
-  </a>
-@endif
-
 @endsection
