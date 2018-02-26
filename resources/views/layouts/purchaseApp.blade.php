@@ -21,32 +21,36 @@
 
   </head>
   <body>
+    <div id="app">
 
-    <section class="hero is-primary is-bold">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            @yield('title')
-          </h1>
-          <h2 class="subtitle">
-            Purchase Demo App
-          </h2>
+      <example></example>
+
+      <section class="hero is-primary is-bold">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              @yield('title')
+            </h1>
+            <h2 class="subtitle">
+              Purchase Demo App
+            </h2>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="container">
-      <div class="columns">
-        <div class="column is-3">
-          @include('components.menu')
+      <section class="container">
+        <div class="columns">
+          <div class="column is-3">
+            @include('components.menu')
+          </div>
+          <div class="column is-9">
+            @yield('content')
+          </div>
         </div>
-        <div class="column is-9">
-          @yield('content')
-        </div>
-      </div>
-    </section>
+      </section>
 
-    @include('components.footer')
-
+      @include('components.footer')
+    </div>
+    <script src="/js/app.js"></script>
   </body>
 </html>
