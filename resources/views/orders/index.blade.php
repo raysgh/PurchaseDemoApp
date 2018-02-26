@@ -31,5 +31,10 @@
     </tbody>
   </table>
 
+  @if(isset($filter))
+    {{ $orders->appends(['filter' => $filter])->links('components.paginate') }}
+  @else
+    {{ $orders->links('components.paginate') }}
+  @endif
 
 @endsection

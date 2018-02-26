@@ -22,7 +22,8 @@ class OrdersController extends Controller
     public function index(Request $request)
     {
         $orders = $this->getOrderList($request['filter']);
-        return view('orders.index', compact('orders'));
+        $filter = $request->filter;
+        return view('orders.index', compact('orders', 'filter'));
     }
 
     /**
@@ -147,21 +148,13 @@ class OrdersController extends Controller
 
     public function getOrderList($filter)
     {
-        $order = Order::with('orderlines');
-
         if ($filter == 'ordered'){
-            $order->where('is_ordered', true);
+            return Order::where('is_ordered', true)->paginate(10);
         } elseif ($filter == 'notOrdered') {
-            $order->where('is_ordered', false);
+            return Order::where('is_ordered', false)->paginate(10);
+        } else {
+            return Order::paginate(10);
         }
-
-        return $order->get()
-            ->map(function ($order) {
-                $order['totalPrice'] = $order['orderLines']->sum(function ($product) {
-                    return $product['quantity'] * $product['price'];
-                });
-                return $order;
-            });
     }
 
 }

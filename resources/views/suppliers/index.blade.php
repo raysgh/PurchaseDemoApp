@@ -23,4 +23,6 @@
     </tbody>
   </table>
 
+  {{ $suppliers->links('components.paginate') }}
+
 @endsection
