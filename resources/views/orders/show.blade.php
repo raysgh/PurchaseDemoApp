@@ -25,7 +25,7 @@
 
   <pu-order-line
     orderlines="{{ $order->orderLines }}"
-    total="{{ number_format($order->totalPrice / 100, 2, ',', '.') }}">
+    total="{{ number_format($order->totalPrice, 2, ',', '.') }}">
   </pu-order-line>
 
   <a class="button is-link" {{ $order->is_ordered ? 'disabled' : 'href=/orders/' . $order->id . '/edit' }}>

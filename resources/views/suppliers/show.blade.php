@@ -101,7 +101,7 @@
                 <td>{{ $order->id }}</td>
                 <td><a href="/orders/{{ $order->id }}">{{ str_limit($order->description, 50) }}</a></td>
                 <td>{{ $order->orderLines->count() }}</td>
-                <td>&euro; {{ number_format($order->totalPrice / 100, 2, ',', '.') }}</td>
+                <td>&euro; {{ number_format($order->totalPrice, 2, ',', '.') }}</td>
               </tr>
             @endforeach
           </tbody>

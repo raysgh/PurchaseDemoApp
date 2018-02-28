@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $guarded = [];
+    protected $appends = ['totalPrice'];
 
     public function user()
     {
@@ -26,8 +27,7 @@ class Order extends Model
     public function getTotalPriceAttribute()
     {
         return $this->orderLines()->get()->sum(function ($product) {
-            return $product['price'] * $product['quantity'];
+            return $product['price'] * $product['quantity'] / 100;
         });
     }
-
 }
