@@ -15,16 +15,11 @@ use App\Order;
 Route::get('/', function() {
     return redirect('/home');
 });
-
-Route::resource('orders', 'OrdersController');
-
-Route::resource('suppliers', 'SuppliersController');
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
+Auth::routes();
 Route::get('/dashboard', 'DashboardController@index');
-
+Route::resource('orders', 'OrdersController');
+Route::resource('order-lines', 'OrderlinesController');
+Route::resource('suppliers', 'SuppliersController');
 Route::get('send-order/{order}', 'SendOrderController@send');
 Route::get('cancel-order/{order}', 'SendOrderController@cancel');

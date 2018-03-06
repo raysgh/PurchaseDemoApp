@@ -51,9 +51,9 @@ class OrdersController extends Controller
         $this->validate($request, [
             'supplier' => 'required',
             'description' => 'required',
-            'pos.*.quantity' => 'required',
+            'pos.*.quantity' => 'required|integer',
             'pos.*.description' => 'required',
-            'pos.*.price' => 'required',
+            'pos.*.price' => 'required|integer',
         ]);
 
         $order = Order::create([
@@ -72,7 +72,7 @@ class OrdersController extends Controller
             ]);
         }
 
-        return redirect('orders/' . $order->id);
+        return $order->id;
     }
 
     /**
@@ -83,10 +83,6 @@ class OrdersController extends Controller
      */
     public function show(Order $order)
     {
-        $order['totalPrice'] = $order['orderLines']->sum(function ($product) {
-            return $product['quantity'] * $product['price'];
-        });
-
         return view('orders.show', compact('order'));
     }
 
@@ -117,6 +113,9 @@ class OrdersController extends Controller
           'pos.*.quantity' => 'required',
           'pos.*.description' => 'required',
           'pos.*.price' => 'required',
+          'posCurrent.*.quantity' => 'required',
+          'posCurrent.*.description' => 'required',
+          'posCurrent.*.price' => 'required',
         ]);
 
         $order->update([
@@ -124,15 +123,24 @@ class OrdersController extends Controller
             'description' => request('description')
         ]);
 
-        foreach ($request->pos as $id => $value) {
-            OrderLine::find($id)->update([
+        foreach ($request->posCurrent as $value) {
+            OrderLine::find($value['id'])->update([
                 'quantity' => $value['quantity'],
                 'description' => $value['description'],
                 'price' => $value['price']
+              ]);
+            }
+
+        foreach ($request->pos as $value) {
+            OrderLine::create([
+                'order_id' => $order->id,
+                'quantity' => $value['quantity'],
+                'description' => $value['description'],
+                'price' => $value['price'],
             ]);
         }
 
-        return redirect('/orders/' . $order->id);
+        return $order->id;
     }
 
     /**
@@ -156,5 +164,4 @@ class OrdersController extends Controller
             return Order::paginate(10);
         }
     }
-
 }
