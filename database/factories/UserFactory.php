@@ -24,12 +24,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Order::class, function (Faker $faker) {
     return [
-        'user_id' => function() {
-            return factory('App\User')->create()->id;
-        },
-        'supplier_id' => function() {
-            return factory('App\Supplier')->create()->id;
-        },
+        'supplier_id' => \App\Supplier::get()->random()->id,
         'description' => $faker->sentence,
         'is_ordered' => $faker->boolean($chanceOfGettingTrue = 20),
     ];
@@ -37,9 +32,6 @@ $factory->define(App\Order::class, function (Faker $faker) {
 
 $factory->define(App\OrderLine::class, function (Faker $faker) {
     return [
-        'order_id' => function() {
-            return factory('App\Order')->create()->id;
-        },
         'description' => $faker->sentence,
         'quantity' => $faker->randomDigitNotNull,
         'price' => $faker->randomNumber($nbDigits = 6, $strict = false),
