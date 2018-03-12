@@ -15,14 +15,19 @@ class DatabaseSeeder extends Seeder
 
         $users = factory(App\User::class, 5)->create();
 
-        factory(App\User::class)->create([
+        $testUser= factory(App\User::class)->create([
             'name' => 'Test',
             'email' => 'test@test.test',
-            'password' => bcrypt('Test'), // secret
+            'password' => bcrypt('Test'),
             'remember_token' => str_random(10),
         ]);
 
+        $users->push($testUser);
+
         $users->each(function ($user) {
+
+            event(new \App\Events\UserRegistrated($user->id));
+
             $orders = $user
                 ->orders()
                 ->saveMany(factory(App\Order::class, rand(5, 30))->make());
