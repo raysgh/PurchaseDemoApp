@@ -16,8 +16,16 @@ Route::get('/', function() {
     return redirect('/home');
 });
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('settings', 'SettingsController@index');
+Route::get('settings/get', 'SettingsController@getSettings');
+Route::get('settings/edit', 'SettingsController@edit');
+Route::put('settings/{setting}', 'SettingsController@update');
+
 Auth::routes();
 Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard/level', 'DashboardController@level');
+
 Route::resource('orders', 'OrdersController');
 Route::resource('order-lines', 'OrderlinesController');
 Route::resource('suppliers', 'SuppliersController');

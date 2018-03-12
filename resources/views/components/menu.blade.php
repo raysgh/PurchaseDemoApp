@@ -20,7 +20,7 @@
       </a>
     </li>
     <li>
-      <a>
+      <a href="/settings">
         <span class="icon has-text-info">
           <i class="fas fa-cog"></i>
         </span>

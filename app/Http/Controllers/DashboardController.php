@@ -16,14 +16,21 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $orders = Order::get()->count();
-        $orderLines = OrderLine::get()->count();
-        $suppliers = Supplier::get()->count();
+        return view('dashboard.index');
+    }
+
+    public function level()
+    {
+        $level = [];
+        $level['orders'] = Order::get()->count();
+        $level['orderLines'] = OrderLine::get()->count();
+        $level['suppliers'] = Supplier::get()->count();
         $spend = OrderLine::get()
             ->sum(function($product) {
                 return $product['quantity'] * $product['price'] / 100000;
         });
+        $level['spend'] = number_format($spend, '0', ',', '.');
 
-        return view('dashboard.index', compact('orders', 'orderLines', 'suppliers', 'spend'));
+        return $level;
     }
 }
