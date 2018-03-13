@@ -13280,7 +13280,7 @@ var render = function() {
         "a",
         {
           staticClass: "card-header-icon",
-          attrs: { href: "#", "aria-label": "more options" },
+          attrs: { "aria-label": "more options" },
           on: { click: _vm.toggle }
         },
         [
@@ -13457,7 +13457,7 @@ var render = function() {
         "a",
         {
           staticClass: "card-header-icon",
-          attrs: { href: "#", "aria-label": "more options" },
+          attrs: { "aria-label": "more options" },
           on: { click: _vm.toggle }
         },
         [
@@ -13647,7 +13647,7 @@ var render = function() {
         "a",
         {
           staticClass: "card-header-icon",
-          attrs: { href: "#", "aria-label": "more options" },
+          attrs: { "aria-label": "more options" },
           on: { click: _vm.toggle }
         },
         [

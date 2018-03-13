@@ -7,7 +7,7 @@
         </span>
         Order Lines
       </p>
-      <a href="#" @click="toggle" class="card-header-icon" aria-label="more options">
+      <a @click="toggle" class="card-header-icon" aria-label="more options">
         <pu-up v-if="visible"></pu-up>
         <pu-down v-if="!visible"></pu-down>
       </a>
