@@ -92,7 +92,7 @@
               <th>Order</th>
               <th>Description</th>
               <th>Lines</th>
-              <th>Total</th>
+              <th><p class="has-text-right">Total</p></th>
             </tr>
           </thead>
           <tbody>
@@ -101,7 +101,7 @@
                 <td>{{ $order->id }}</td>
                 <td><a href="/orders/{{ $order->id }}">{{ str_limit($order->description, 50) }}</a></td>
                 <td>{{ $order->orderLines->count() }}</td>
-                <td>&euro; {{ number_format($order->totalPrice, 2, ',', '.') }}</td>
+                <td><p class="has-text-right">&euro; {{ number_format($order->totalPrice, 2, '.', ',') }}</p></td>
               </tr>
             @endforeach
           </tbody>

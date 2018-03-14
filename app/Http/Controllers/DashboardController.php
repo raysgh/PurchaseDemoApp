@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $level['suppliers'] = Supplier::get()->count();
         $spend = OrderLine::get()
             ->sum(function($product) {
-                return $product['quantity'] * $product['price'] / 100000;
+                return $product['quantity'] * $product['price'] / 1000;
         });
         $level['spend'] = number_format($spend, '0', ',', '.');
 

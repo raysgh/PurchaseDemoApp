@@ -19,22 +19,22 @@
             <tr>
               <th>Quantity</th>
               <th>Description</th>
-              <th>Unit Price</th>
-              <th>Amount</th>
+              <th><p class="has-text-right">Unit Price</p></th>
+              <th><p class="has-text-right">Amount</p></th>
             </tr>
           </thead>
           <tbody>
               <tr v-for="orderline in orderlinesx">
                 <td>{{ orderline.quantity}}</td>
                 <td>{{ orderline.description}}</td>
-                <td>&euro; {{ orderline.price / 100}}</td>
-                <td>&euro; {{ orderline.quantity * orderline.price / 100}}</td>
+                <td><p class="has-text-right">&euro; {{ orderline.price.toFixed(2) }}</p></td>
+                <td><p class="has-text-right">&euro; {{ subtotal(orderline.quantity, orderline.price) }}</p></td>
               </tr>
             <tr>
               <td></td>
               <td></td>
-              <td><strong>Total:</strong></td>
-              <td><strong>&euro; {{ total }}</strong></td>
+              <td><p class="has-text-right"><strong>Total:</strong></p></td>
+              <td><p class="has-text-right"><strong>&euro; {{ total }}</strong></p></td>
             </tr>
           </tbody>
         </table>
@@ -55,6 +55,10 @@
         methods: {
             toggle() {
               this.visible = !this.visible;
+            },
+            subtotal(qty, value) {
+              let subtotal = qty * value;
+              return subtotal.toFixed(2);
             }
         }
     }

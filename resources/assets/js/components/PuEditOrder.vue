@@ -39,7 +39,7 @@
         </div>
         <div class="control has-icons-left">
           <input class="input" type="text"
-              id="price" name="price" placeholder="0,00"
+              id="price" name="price" placeholder="0.00"
               v-model="position.price" @keydown="errors.clearPosCurrent(index,'price')">
           <p class="help is-danger" v-text="errors.getPosCurrent(index,'price')"></p>
           <span class="icon is-small is-left">
@@ -71,7 +71,7 @@
         </div>
         <div class="control has-icons-left">
           <input class="input" type="text"
-              id="price" name="price" placeholder="0,00"
+              id="price" name="price" placeholder="0.00"
               v-model="position.price" @keydown="errors.clearPos(index,'price')">
           <p class="help is-danger" v-text="errors.getPos(index,'price')">></p>
           <span class="icon is-small is-left">

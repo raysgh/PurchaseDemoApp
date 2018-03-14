@@ -27,7 +27,7 @@ class Order extends Model
     public function getTotalPriceAttribute()
     {
         return $this->orderLines()->get()->sum(function ($product) {
-            return $product['price'] * $product['quantity'] / 100;
+            return $product['price'] * $product['quantity'];
         });
     }
 }

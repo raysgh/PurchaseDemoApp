@@ -13627,6 +13627,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     toggle: function toggle() {
       this.visible = !this.visible;
+    },
+    subtotal: function subtotal(qty, value) {
+      var subtotal = qty * value;
+      return subtotal.toFixed(2);
     }
   }
 });
@@ -13674,13 +13678,24 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(orderline.description))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v("€ " + _vm._s(orderline.price / 100))]),
+                      _c("td", [
+                        _c("p", { staticClass: "has-text-right" }, [
+                          _vm._v("€ " + _vm._s(orderline.price.toFixed(2)))
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._v(
-                          "€ " +
-                            _vm._s(orderline.quantity * orderline.price / 100)
-                        )
+                        _c("p", { staticClass: "has-text-right" }, [
+                          _vm._v(
+                            "€ " +
+                              _vm._s(
+                                _vm.subtotal(
+                                  orderline.quantity,
+                                  orderline.price
+                                )
+                              )
+                          )
+                        ])
                       ])
                     ])
                   }),
@@ -13692,7 +13707,11 @@ var render = function() {
                     _vm._v(" "),
                     _vm._m(2),
                     _vm._v(" "),
-                    _c("td", [_c("strong", [_vm._v("€ " + _vm._s(_vm.total))])])
+                    _c("td", [
+                      _c("p", { staticClass: "has-text-right" }, [
+                        _c("strong", [_vm._v("€ " + _vm._s(_vm.total))])
+                      ])
+                    ])
                   ])
                 ],
                 2
@@ -13725,9 +13744,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Unit Price")]),
+        _c("th", [
+          _c("p", { staticClass: "has-text-right" }, [_vm._v("Unit Price")])
+        ]),
         _vm._v(" "),
-        _c("th", [_vm._v("Amount")])
+        _c("th", [
+          _c("p", { staticClass: "has-text-right" }, [_vm._v("Amount")])
+        ])
       ])
     ])
   },
@@ -13735,7 +13758,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [_c("strong", [_vm._v("Total:")])])
+    return _c("td", [
+      _c("p", { staticClass: "has-text-right" }, [
+        _c("strong", [_vm._v("Total:")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -14153,7 +14180,7 @@ var render = function() {
                   type: "text",
                   id: "price",
                   name: "price",
-                  placeholder: "0,00"
+                  placeholder: "0.00"
                 },
                 domProps: { value: position.price },
                 on: {
@@ -14742,7 +14769,7 @@ var render = function() {
                   type: "text",
                   id: "price",
                   name: "price",
-                  placeholder: "0,00"
+                  placeholder: "0.00"
                 },
                 domProps: { value: position.price },
                 on: {
@@ -14891,7 +14918,7 @@ var render = function() {
                   type: "text",
                   id: "price",
                   name: "price",
-                  placeholder: "0,00"
+                  placeholder: "0.00"
                 },
                 domProps: { value: position.price },
                 on: {

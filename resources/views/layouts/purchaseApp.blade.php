@@ -5,20 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Purchase Demo App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-    <style>
-      .hero {
-        margin-bottom: 2em;
-      }
-      .footer {
-        margin-top: 2em;
-      }
-      .card {
-        margin-top: 1em;
-        margin-bottom: 1em;
-      }
-    </style>
-
   </head>
   <body>
     <div id="app">

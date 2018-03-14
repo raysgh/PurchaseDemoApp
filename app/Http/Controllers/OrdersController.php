@@ -51,9 +51,9 @@ class OrdersController extends Controller
         $this->validate($request, [
             'supplier' => 'required',
             'description' => 'required',
-            'pos.*.quantity' => 'required|integer',
+            'pos.*.quantity' => 'required|integer|max:1000',
             'pos.*.description' => 'required',
-            'pos.*.price' => 'required|integer',
+            'pos.*.price' => 'required|numeric|max:10000000',
         ]);
 
         $order = Order::create([
@@ -110,12 +110,12 @@ class OrdersController extends Controller
         $this->validate($request, [
           'supplier' => 'required',
           'description' => 'required',
-          'pos.*.quantity' => 'required',
+          'pos.*.quantity' => 'required|integer|max:1000',
           'pos.*.description' => 'required',
-          'pos.*.price' => 'required',
-          'posCurrent.*.quantity' => 'required',
+          'pos.*.price' => 'required|numeric|max:10000000',
+          'posCurrent.*.quantity' => 'required|integer|max:1000',
           'posCurrent.*.description' => 'required',
-          'posCurrent.*.price' => 'required',
+          'posCurrent.*.price' => 'required|numeric|max:10000000',
         ]);
 
         $order->update([
