@@ -94,6 +94,10 @@ class OrdersController extends Controller
      */
     public function edit(Order $order)
     {
+        if ($order->is_ordered) {
+            abort(401, 'This action is not allowed');
+        }
+
         $suppliers = Supplier::get();
         return view('orders.edit', compact('order', 'suppliers'));
     }
@@ -107,6 +111,10 @@ class OrdersController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        if ($order->is_ordered) {
+            abort(401, 'This action is not allowed');
+        }
+
         $this->validate($request, [
           'supplier' => 'required',
           'description' => 'required',
