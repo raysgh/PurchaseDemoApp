@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Setting;
+use App\User;
 
 class SettingsController extends Controller
 {
@@ -19,13 +20,7 @@ class SettingsController extends Controller
 
     public function getSettings()
     {
-        $this->lijst = collect();
-        $settings = Setting::where('user_id', auth()->id())->get();
-        $settings->each(function($x) {
-            $this->lijst->put($x->name, $x->value);
-        });
-
-        return $this->lijst;
+        return User::find(auth()->id())->userSettings();
     }
 
     public function edit()

@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $list;
+
     public function orders()
     {
         return $this->hasMany('App\Order');
@@ -35,5 +37,17 @@ class User extends Authenticatable
     public function settings()
     {
         return $this->hasMany('App\Setting');
+    }
+
+    public function userSettings()
+    {
+        $this->list = collect();
+
+        $this->settings()->get()
+            ->each(function($x) {
+                $this->list->put($x->name, $x->value);
+            });
+
+        return $this->list;
     }
 }
