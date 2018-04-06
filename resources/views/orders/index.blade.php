@@ -29,8 +29,8 @@
     </tbody>
   </table>
 
-  @if(isset($filter))
-    {{ $orders->appends(['filter' => $filter])->links('components.paginate') }}
+  @if(isset($appliedFilters))
+    {{ $orders->appends($appliedFilters)->links('components.paginate') }}
   @else
     {{ $orders->links('components.paginate') }}
   @endif

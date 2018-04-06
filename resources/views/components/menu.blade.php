@@ -49,7 +49,7 @@
       </a>
     </li>
     <li>
-      <a href="/orders?filter=ordered">
+      <a href="/orders?ordered=1">
         <span class="icon has-text-info">
           <i class="fas fa-shopping-cart"></i>
         </span>
@@ -57,7 +57,7 @@
       </a>
     </li>
     <li>
-      <a href="/orders?filter=notOrdered">
+      <a href="/orders?notOrdered=1">
         <span class="icon has-text-info">
           <i class="fab fa-opencart"></i>
         </span>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\OrderLine;
 use App\Supplier;
+use App\Filters\Filter;
 
 class OrdersController extends Controller
 {
@@ -19,11 +20,13 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, Filter $filter)
     {
-        $orders = $this->getOrderList($request['filter']);
-        $filter = $request->filter;
-        return view('orders.index', compact('orders', 'filter'));
+        $orders = $this->getOrderList($filter);
+
+        $appliedFilters = $filter->getFilters();
+
+        return view('orders.index', compact('orders', 'appliedFilters'));
     }
 
     /**
@@ -162,14 +165,10 @@ class OrdersController extends Controller
         //
     }
 
-    public function getOrderList($filter)
+    public function getOrderList(Filter $filter)
     {
-        if ($filter == 'ordered'){
-            return Order::where('is_ordered', true)->paginate(10);
-        } elseif ($filter == 'notOrdered') {
-            return Order::where('is_ordered', false)->paginate(10);
-        } else {
-            return Order::paginate(10);
-        }
+        $orders = Order::latest()->filter($filter);
+
+        return $orders->paginate(10);
     }
 }

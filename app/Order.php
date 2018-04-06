@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Filters\Filter;
 
 class Order extends Model
 {
@@ -29,5 +30,10 @@ class Order extends Model
         return $this->orderLines()->get()->sum(function ($product) {
             return $product['price'] * $product['quantity'];
         });
+    }
+
+    public function scopeFilter($query, Filter $filter)
+    {
+        return $filter->apply($query);
     }
 }
